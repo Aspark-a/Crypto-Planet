@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Planet</title>
+  <link rel="icon" type="image/png" href="/assets/logo-9e8c3b58.png" />
+  <!-- Non-blocking font load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0E1A; --bg2: #111827; --card: #1E2640; --card2: #252d45;
+      --border: #2a3450; --accent: #00D4FF; --accent2: #0099cc;
+      --green: #00FF88; --red: #FF4757; --text: #E8EAF0;
+      --text2: #8892aa; --text3: #5a6380; --gold: #FFD700;
+      --font: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); }
+    #root { height: 100%; }
+    /* Instant splash while JS loads */
+    #splash {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; transition: opacity 0.3s;
+    }
+    #splash.hidden { opacity: 0; pointer-events: none; }
+    .splash-logo { width: 180px; margin-bottom: 20px; filter: brightness(0) invert(1); opacity: 0.9; animation: pulse 1.5s ease-in-out infinite; }
+    .splash-sub { font-size: 13px; color: #8892aa; margin-top: 6px; }
+    .splash-bar { width: 200px; height: 3px; background: #2a3450; border-radius: 2px; margin-top: 24px; overflow: hidden; }
+    .splash-bar-fill { height: 100%; width: 30%; background: linear-gradient(90deg, #00D4FF, #00FF88); border-radius: 2px; animation: loading 1.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:0.9} 50%{opacity:1} }
+    @keyframes loading { 0%{transform:translateX(-100%)} 100%{transform:translateX(400%)} }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    input, select, textarea { color-scheme: dark; }
+  </style>
+  <script type="module" crossorigin src="/assets/index-c5de03fc.js"></script>
+</head>
+<body>
+  <!-- Instant splash shown before React mounts -->
+  <div id="splash">
+    <img class="splash-logo" src="/assets/logo-9e8c3b58.png" alt="Crypto Planet" />
+    <div class="splash-sub">Loading your dashboard…</div>
+    <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  </div>
+
+  <div id="root"></div>
+
+  
+  <script>
+    // Hide splash once React has rendered
+    window.__hideSplash = () => {
+      const el = document.getElementById('splash')
+      if (el) { el.classList.add('hidden'); setTimeout(() => el.remove(), 400) }
+    }
+  </script>
+</body>
+</html>
